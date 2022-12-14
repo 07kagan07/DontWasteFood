@@ -14,7 +14,7 @@ export default function App() {
           onPress={() => {
             setCamera(!camera);
           }}
-          children={"Bas Bana"}
+          children={camera ? "Kamerayı Kapat" : "Kamerayı Aç"}
         />
         <StatusBar style="auto" />
       </View>
