@@ -7,8 +7,13 @@ import ProductDetail from "../components/ProductDetail";
 
 const CameraScan = () => {
   const [scannedData, setScannedData] = useState([]);
-  //   const [camera, setCamera] = useState(false);
-  console.log(scannedData);
+
+  scannedData && console.log(scannedData);
+
+  const deleteItem = async (e) => {
+    setScannedData(scannedData?.filter((item) => item.BarcodeNo !== e));
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.camera}>
@@ -18,7 +23,12 @@ const CameraScan = () => {
       <View style={styles.products}>
         {scannedData &&
           scannedData.map((data, index) => (
-            <ProductDetail key={index} scannedData={data} />
+            <ProductDetail
+              key={index}
+              index={index}
+              scannedData={data}
+              deleteItem={deleteItem}
+            />
           ))}
       </View>
 
