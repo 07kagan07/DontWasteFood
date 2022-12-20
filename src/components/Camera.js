@@ -4,10 +4,9 @@ import { BarCodeScanner } from "expo-barcode-scanner";
 import barcodeData from "../barkod.json";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
-export default function CameraExam() {
+export default function CameraExam({ scannedData, setScannedData }) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [inputValue, setInputValue] = useState();
   const Stack = createNativeStackNavigator();
 
   useEffect(() => {
@@ -21,12 +20,13 @@ export default function CameraExam() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
+
     const barcode = barcodeData?.find((barcode) => barcode.BarcodeNo === data);
 
-    console.log("Product Detail=>", barcode);
+    // console.log("Product Detail=>", barcode);
 
     barcode
-      ? alert(`Ürün adı: ${barcode.ProductName}`)
+      ? setScannedData([...scannedData, barcode])
       : alert(`Ürün Bulunamadı!`);
   };
 
@@ -44,30 +44,19 @@ export default function CameraExam() {
         style={styles.camera}
       />
 
-      {/* <View style={{ width: "100%", height: "10%" }}>
-        {scanned && (
-          <Button
-            title={"Tap to Scan Again"}
-            onPress={() => setScanned(false)}
-          />
-        )}
-      </View> */}
+      {scanned && (
+        <Button
+          style={styles.button}
+          title={"Tap to Scan Again"}
+          onPress={() => setScanned(false)}
+        />
+      )}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    flexDirection: "column",
-    // justifyContent: "center",
-    width: "100%",
-  },
-  camera: {
-    height: "100%",
-    width: "100%",
-  },
-  input: {
-    zIndex: 1,
-  },
+  container: { width: "100%", height: 200 },
+  camera: { height: "100%", width: "100%" },
+  button: { width: "100%", height: 20 },
 });
