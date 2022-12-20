@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button, TextInput } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import barcodeData from "../barkod.json";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 export default function CameraExam() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [inputValue, setInputValue] = useState();
+  const Stack = createNativeStackNavigator();
 
   useEffect(() => {
     const getBarCodeScannerPermissions = async () => {
@@ -20,19 +23,11 @@ export default function CameraExam() {
     setScanned(true);
     const barcode = barcodeData?.find((barcode) => barcode.BarcodeNo === data);
 
-    console.log(barcode);
+    console.log("Product Detail=>", barcode);
 
     barcode
       ? alert(`Ürün adı: ${barcode.ProductName}`)
       : alert(`Ürün Bulunamadı!`);
-    //   : (event) => {
-    //       event.preventDefault();
-    //       <TextInput onChange={(e) => setInputValue(e.target.value)} />;
-    //       barcodeData.push({
-    //         BarcodeNo: data,
-    //         ProductName: inputValue,
-    //       });
-    //     };
   };
 
   if (hasPermission === null) {
@@ -48,26 +43,31 @@ export default function CameraExam() {
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
         style={styles.camera}
       />
-      {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
-      )}
+
+      {/* <View style={{ width: "100%", height: "10%" }}>
+        {scanned && (
+          <Button
+            title={"Tap to Scan Again"}
+            onPress={() => setScanned(false)}
+          />
+        )}
+      </View> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "center",
-    width: "100%",
     height: "100%",
+    flexDirection: "column",
+    // justifyContent: "center",
+    width: "100%",
   },
   camera: {
-    flex: 1,
+    height: "100%",
+    width: "100%",
   },
   input: {
-    flex: 1,
     zIndex: 1,
   },
 });
