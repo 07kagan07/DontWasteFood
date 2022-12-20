@@ -10,8 +10,14 @@ const CameraScan = () => {
 
   scannedData && console.log(scannedData);
 
-  const deleteItem = async (e) => {
-    setScannedData(scannedData?.filter((item) => item.BarcodeNo !== e));
+  const deleteItem = async (idx) => {
+    const temp = [...scannedData];
+
+    temp.splice(idx, 1);
+
+    setScannedData(temp);
+
+    // setScannedData(scannedData?.filter((item) => item.BarcodeNo !== e));
   };
 
   return (
@@ -25,7 +31,7 @@ const CameraScan = () => {
           scannedData.map((data, index) => (
             <ProductDetail
               key={index}
-              index={index}
+              idx={index}
               scannedData={data}
               deleteItem={deleteItem}
             />

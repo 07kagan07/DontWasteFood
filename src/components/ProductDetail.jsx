@@ -1,14 +1,14 @@
 import { View, Text, StyleSheet, Button } from "react-native";
 import React from "react";
 
-const ProductDetail = ({ index, scannedData, deleteItem }) => {
+const ProductDetail = ({ idx, scannedData, deleteItem }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.productName}>{scannedData?.ProductName}</Text>
       <Text style={styles.text}>dd/mm/yyyy</Text>
       <Button
         onPress={() => {
-          deleteItem(scannedData?.BarcodeNo);
+          deleteItem(idx);
         }}
         title="X"
         color={"white"}
