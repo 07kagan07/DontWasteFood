@@ -1,10 +1,18 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Button } from "react-native";
 import React from "react";
 
 const ProductDetail = ({ scannedData }) => {
   return (
     <View style={styles.container}>
-      <Text style={{ color: "#000" }}>{scannedData?.ProductName}</Text>
+      <Text style={styles.productName}>{scannedData?.ProductName}</Text>
+      <Text style={styles.text}>dd/mm/yyyy</Text>
+      <Button
+        onPress={() => {
+          alert("You tapped the button!");
+        }}
+        title="X"
+        color={"white"}
+      />
     </View>
   );
 };
@@ -12,8 +20,15 @@ const ProductDetail = ({ scannedData }) => {
 export default ProductDetail;
 
 const styles = StyleSheet.create({
-  container: {},
-  tabNavigator: {
+  container: {
     backgroundColor: "#222222",
+    height: 37,
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    borderRadius: 10,
+    margin: 5,
   },
+  text: { color: "#fff" },
+  productName: { maxWidth: 100, color: "#fff", textAlign: "center" },
 });

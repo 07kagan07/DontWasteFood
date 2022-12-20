@@ -15,7 +15,7 @@ const CameraScan = () => {
         <CameraExam scannedData={scannedData} setScannedData={setScannedData} />
       </View>
 
-      <View style={{ width: "100%" }}>
+      <View style={styles.products}>
         {scannedData &&
           scannedData.map((data, index) => (
             <ProductDetail key={index} scannedData={data} />
@@ -28,8 +28,9 @@ const CameraScan = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
-  camera: { width: "100%" },
+  container: { flex: 1, backgroundColor: "#2B2828" },
+  camera: { flex: 1, width: "100%" },
+  products: { flex: 1 },
 });
 
 export default CameraScan;
