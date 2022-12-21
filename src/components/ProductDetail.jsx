@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import DatePicker from "./DatePicker";
@@ -20,6 +21,22 @@ const ProductDetail = ({ idx, data, deleteItem, scannedData }) => {
       </Text>
       <Pressable
         style={styles.btn}
+=======
+import { View, Text, StyleSheet, Button } from "react-native";
+import React from "react";
+import DatePicker from "react-native-date-picker";
+
+const ProductDetail = ({ idx, scannedData, deleteItem }) => {
+  const [date, setDate] = useState(new Date());
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.productName}>{scannedData?.ProductName}</Text>
+      <Text style={styles.text}>
+        <DatePicker date={date} onDateChange={setDate} />
+      </Text>
+      <Button
+>>>>>>> 438bc37 (datePicker)
         onPress={() => {
           deleteItem(idx);
         }}
