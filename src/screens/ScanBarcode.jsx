@@ -9,7 +9,7 @@ import { Ionicons } from "@expo/vector-icons";
 const CameraScan = () => {
   const [scannedData, setScannedData] = useState([]);
 
-  scannedData && console.log(scannedData);
+  // scannedData && console.log(scannedData);
 
   const deleteItem = async (idx) => {
     const temp = [...scannedData];
@@ -17,8 +17,10 @@ const CameraScan = () => {
     temp.splice(idx, 1);
 
     setScannedData(temp);
+  };
 
-    // setScannedData(scannedData?.filter((item) => item.BarcodeNo !== e));
+  const addDate = (idx) => {
+    // setScannedData();
   };
 
   return (
@@ -43,7 +45,7 @@ const CameraScan = () => {
       </ScrollView>
 
       <View style={styles.buttons}>
-        <Pressable style={styles.confirmBtn}>
+        <Pressable style={styles.confirmBtn} onPress={addDate}>
           <Text
             style={{
               color: "white",

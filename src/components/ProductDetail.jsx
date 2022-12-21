@@ -1,17 +1,21 @@
-import { View, Text, StyleSheet, Button, Pressable } from "react-native";
-import React, { useState } from "react";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import React, { useEffect, useState } from "react";
+import DatePicker from "./DatePicker";
 
-const ProductDetail = ({ idx, data, deleteItem }) => {
+const ProductDetail = ({ idx, data, deleteItem, scannedData }) => {
   const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(true);
+  useEffect(() => {
+    data.date = date;
+
+    console.log(scannedData);
+  }, [date]);
 
   return (
     <View style={styles.container}>
       <Text style={styles.productName}>{data?.ProductName}</Text>
       <Text style={styles.text}>
         <Text style={styles.text}>
-          DD/MM/YYYY
-          {/* <DatePicker style={styles.text} date={date} onDateChange={setDate} /> */}
+          <DatePicker date={date} setDate={setDate} />
         </Text>
       </Text>
       <Pressable
