@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, Pressable } from "react-native";
 import React from "react";
 
 const ProductDetail = ({ idx, scannedData, deleteItem }) => {
@@ -6,13 +6,9 @@ const ProductDetail = ({ idx, scannedData, deleteItem }) => {
     <View style={styles.container}>
       <Text style={styles.productName}>{scannedData?.ProductName}</Text>
       <Text style={styles.text}>dd/mm/yyyy</Text>
-      <Button
-        onPress={() => {
-          deleteItem(idx);
-        }}
-        title="X"
-        color={"white"}
-      />
+      <Pressable style={styles.btn} onPress={() => {}}>
+        <Text>X</Text>
+      </Pressable>
     </View>
   );
 };
@@ -29,6 +25,11 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 5,
   },
-  text: { color: "#fff" },
+  text: { color: "#d9d9d9" },
   productName: { maxWidth: 100, color: "#fff", textAlign: "center" },
+  btn: {
+    backgroundColor: "#ff3737",
+    padding: 5,
+    borderRadius: 50,
+  },
 });

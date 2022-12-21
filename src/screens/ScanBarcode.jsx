@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import React, { useState } from "react";
 import Button from "../components/Button";
 import CameraExam from "../components/Camera";
 import { StatusBar } from "expo-status-bar";
 import ProductDetail from "../components/ProductDetail";
+import { Ionicons } from "@expo/vector-icons";
 
 const CameraScan = () => {
   const [scannedData, setScannedData] = useState([]);
@@ -26,16 +27,41 @@ const CameraScan = () => {
         <CameraExam scannedData={scannedData} setScannedData={setScannedData} />
       </View>
 
-      <View style={styles.products}>
-        {scannedData &&
-          scannedData.map((data, index) => (
-            <ProductDetail
-              key={index}
-              idx={index}
-              scannedData={data}
-              deleteItem={deleteItem}
-            />
-          ))}
+      <ScrollView style={styles.products}>
+        <View>
+          {scannedData &&
+            scannedData.map((data, index) => (
+              <ProductDetail
+                key={index}
+                idx={index}
+                data={data}
+                deleteItem={deleteItem}
+                scannedData={scannedData}
+              />
+            ))}
+        </View>
+      </ScrollView>
+
+      <View style={styles.buttons}>
+        <Pressable style={styles.confirmBtn}>
+          <Text
+            style={{
+              color: "white",
+              textAlign: "center",
+              fontWeight: "700",
+              fontSize: 20,
+            }}
+          >
+            CONFIRM
+          </Text>
+        </Pressable>
+        <Pressable onPress={() => {}}>
+          <Ionicons
+            name="md-add-circle"
+            size={30}
+            style={{ color: "#219653" }}
+          />
+        </Pressable>
       </View>
 
       <StatusBar style="auto" />
@@ -44,9 +70,24 @@ const CameraScan = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#2B2828" },
-  camera: { flex: 1, width: "100%" },
+  container: {
+    flex: 3,
+    backgroundColor: "#2B2828",
+  },
+  camera: { flex: 1 },
   products: { flex: 1 },
+  buttons: {
+    padding: 5,
+    margin: 20,
+    flexDirection: "row",
+    alignItems: "baseline",
+  },
+  confirmBtn: {
+    backgroundColor: "#2F80ED",
+    borderRadius: 10,
+    flex: 1,
+    padding: 5,
+  },
 });
 
 export default CameraScan;
