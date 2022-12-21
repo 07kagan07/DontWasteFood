@@ -3,7 +3,7 @@ import { Ionicons } from "@expo/vector-icons";
 import ScanBarcode from "./src/screens/ScanBarcode";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import AddItem from "./src/screens/AddItem";
+import Home from "./src/screens/Home";
 import { Camera } from "expo-camera";
 
 const Tab = createBottomTabNavigator();
@@ -38,7 +38,7 @@ export default function App() {
               tabBarActiveTintColor: "tomato",
             })}
           >
-            <Tab.Screen name="Home" component={AddItem} />
+            <Tab.Screen name="Home" component={Home} />
             <Tab.Screen name="Scan Barcode" component={ScanBarcode} />
           </Tab.Navigator>
         </NavigationContainer>

@@ -1,12 +1,25 @@
 import { View, Text, StyleSheet, Button, Pressable } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 
-const ProductDetail = ({ idx, scannedData, deleteItem }) => {
+const ProductDetail = ({ idx, data, deleteItem }) => {
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(true);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.productName}>{scannedData?.ProductName}</Text>
-      <Text style={styles.text}>dd/mm/yyyy</Text>
-      <Pressable style={styles.btn} onPress={() => {}}>
+      <Text style={styles.productName}>{data?.ProductName}</Text>
+      <Text style={styles.text}>
+        <Text style={styles.text}>
+          DD/MM/YYYY
+          {/* <DatePicker style={styles.text} date={date} onDateChange={setDate} /> */}
+        </Text>
+      </Text>
+      <Pressable
+        style={styles.btn}
+        onPress={() => {
+          deleteItem(idx);
+        }}
+      >
         <Text>X</Text>
       </Pressable>
     </View>
@@ -26,7 +39,12 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   text: { color: "#d9d9d9" },
-  productName: { maxWidth: 100, color: "#fff", textAlign: "center" },
+  productName: {
+    height: 37,
+    maxWidth: 100,
+    color: "#fff",
+    textAlign: "center",
+  },
   btn: {
     backgroundColor: "#ff3737",
     padding: 5,
