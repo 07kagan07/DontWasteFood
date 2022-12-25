@@ -19,10 +19,13 @@ const CameraScan = () => {
     setScannedData(temp);
   };
 
-  const addDate = (idx) => {
-    // setScannedData();
+  const addDate = (date, idx) => {
+    console.log("data=>", date, "IDX=>", idx);
+    // console.log("Scanned=>==>", scannedData[0]);
+    // setScannedData(temp);
   };
 
+  // console.log("scanned==>", scannedData);
   return (
     <View style={styles.container}>
       <View style={styles.camera}>
@@ -39,13 +42,14 @@ const CameraScan = () => {
                 data={data}
                 deleteItem={deleteItem}
                 scannedData={scannedData}
+                addDate={addDate}
               />
             ))}
         </View>
       </ScrollView>
 
       <View style={styles.buttons}>
-        <Pressable style={styles.confirmBtn} onPress={addDate}>
+        <Pressable style={styles.confirmBtn}>
           <Text
             style={{
               color: "white",

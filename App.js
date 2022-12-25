@@ -50,6 +50,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {},
   tabNavigator: {
-    backgroundColor: "#222222",
+    backgroundColor: "#fff",
   },
 });

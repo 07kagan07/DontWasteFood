@@ -2,14 +2,12 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import React, { useEffect, useState } from "react";
 import DatePicker from "./DatePicker";
 
-const ProductDetail = ({ idx, data, deleteItem, scannedData }) => {
+const ProductDetail = ({ idx, data, deleteItem, scannedData, addDate }) => {
   const [date, setDate] = useState(new Date());
   useEffect(() => {
-    data.date = date;
-
-    console.log(scannedData);
+    addDate(date, idx);
+    // console.log("Detail data=>", date, "Detail IDX=>", idx);
   }, [date]);
-
   return (
     <View style={styles.container}>
       <Text style={styles.productName}>{data?.ProductName}</Text>
