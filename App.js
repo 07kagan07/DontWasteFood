@@ -1,10 +1,9 @@
-import { StyleSheet, Text, View, SafeAreaView } from "react-native";
+import { StyleSheet, View, SafeAreaView, useColorScheme } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ScanBarcode from "./src/screens/ScanBarcode";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./src/screens/Home";
-import { Camera } from "expo-camera";
 
 const Tab = createBottomTabNavigator();
 
@@ -12,9 +11,15 @@ export default function App() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#2B2828" }}>
       <View style={{ flex: 1, backgroundColor: "#2B2828" }}>
-        <NavigationContainer style={styles.tabNavigator}>
+        <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
+              tabBarStyle: { backgroundColor: "#2b2828" },
+              headerStyle: {
+                backgroundColor: "#2B2828",
+              },
+              headerTitleStyle: { color: "#fff" },
+              headerTitleAlign: "center",
               tabBarIcon: ({ focused, color, size }) => {
                 if (route.name === "Home") {
                   return (
@@ -47,9 +52,4 @@ export default function App() {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {},
-  tabNavigator: {
-    backgroundColor: "#fff",
-  },
-});
+const styles = StyleSheet.create({});

@@ -14,6 +14,7 @@ const ProductDetail = ({ idx, data, deleteItem, addDate }) => {
   return (
     <View style={styles.container}>
       <TextInput
+        selectTextOnFocus
         style={styles.productName}
         placeholder={showPlaceholder ? data?.ProductName : ""}
         placeholderTextColor="grey"

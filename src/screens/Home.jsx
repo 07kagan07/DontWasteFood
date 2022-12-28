@@ -3,7 +3,7 @@ import React from "react";
 
 const AddItem = () => {
   return (
-    <View>
+    <View style={{ flex: 1, backgroundColor: "#2B2828" }}>
       <Text>AddItem</Text>
     </View>
   );
