@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import React, { useState } from "react";
-import Button from "../components/Button";
 import CameraExam from "../components/Camera";
 import { StatusBar } from "expo-status-bar";
 import ProductDetail from "../components/ProductDetail";
@@ -8,8 +7,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 const CameraScan = () => {
   const [scannedData, setScannedData] = useState([]);
-
-  // scannedData && console.log(scannedData);
+  const [text, onChangeText] = useState("Product Name");
 
   const deleteItem = async (idx) => {
     const temp = [...scannedData];
@@ -21,11 +19,13 @@ const CameraScan = () => {
 
   const addDate = (date, idx) => {
     console.log("data=>", date, "IDX=>", idx);
-    // console.log("Scanned=>==>", scannedData[0]);
-    // setScannedData(temp);
   };
 
-  // console.log("scanned==>", scannedData);
+  const handleAddData = () => {
+    const newData = { ProductName: "Product Name" };
+    setScannedData([...scannedData, newData]);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.camera}>
@@ -43,6 +43,7 @@ const CameraScan = () => {
                 deleteItem={deleteItem}
                 scannedData={scannedData}
                 addDate={addDate}
+                onChangeText={onChangeText}
               />
             ))}
         </View>
@@ -61,10 +62,10 @@ const CameraScan = () => {
             CONFIRM
           </Text>
         </Pressable>
-        <Pressable onPress={() => {}}>
+        <Pressable onPress={handleAddData}>
           <Ionicons
             name="md-add-circle"
-            size={40}
+            size={50}
             style={{ color: "#219653" }}
           />
         </Pressable>
@@ -80,8 +81,10 @@ const styles = StyleSheet.create({
     flex: 3,
     backgroundColor: "#2B2828",
   },
-  camera: { flex: 1 },
-  products: { flex: 1.7 },
+  camera: { flex: 0.8 },
+  products: {
+    flex: 1.7,
+  },
   buttons: {
     flex: 0.2,
     flexDirection: "row",
@@ -90,23 +93,14 @@ const styles = StyleSheet.create({
     padding: 5,
     margin: 15,
     bottom: 5,
-    alignItems: "baseline",
   },
   confirmBtn: {
     backgroundColor: "#2F80ED",
     borderRadius: 10,
     flex: 1,
     padding: 5,
+    marginRight: 10,
   },
 });
 
 export default CameraScan;
-
-{
-  /* <Button
-  onPress={() => {
-    setCamera(!camera);
-  }}
-  children={camera ? "Kamerayı Kapat" : "Kamerayı Aç"}
-/> */
-}

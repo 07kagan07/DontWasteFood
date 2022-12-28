@@ -1,20 +1,29 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, TextInput } from "react-native";
 import React, { useEffect, useState } from "react";
 import DatePickerr from "./DatePicker";
 
-const ProductDetail = ({ idx, data, deleteItem, scannedData, addDate }) => {
+const ProductDetail = ({ idx, data, deleteItem, addDate }) => {
   const [date, setDate] = useState(new Date());
+  const [showPlaceholder, setShowPlaceholder] = useState(true);
+  const [newData, setNewData] = useState(data?.ProductName);
+
   useEffect(() => {
     addDate(date, idx);
-    // console.log("Detail data=>", date, "Detail IDX=>", idx);
   }, [date]);
+
   return (
     <View style={styles.container}>
-      <Text style={styles.productName}>{data?.ProductName}</Text>
-      <Text style={styles.text}>
-        <Text style={styles.text}>
-          <DatePickerr date={date} setDate={setDate} />
-        </Text>
+      <TextInput
+        style={styles.productName}
+        placeholder={showPlaceholder ? data?.ProductName : ""}
+        placeholderTextColor="grey"
+        onChangeText={setNewData}
+        value={newData === "Product Name" ? "" : newData}
+        onFocus={() => setShowPlaceholder(false)}
+        onBlur={() => setShowPlaceholder(true)}
+      />
+      <Text style={styles.date}>
+        <DatePickerr date={date} setDate={setDate} />
       </Text>
       <Pressable
         style={styles.btn}
@@ -40,21 +49,22 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 5,
   },
-  text: {
+  date: {
     color: "#d9d9d9",
     alignItems: "center",
     justifyContent: "center",
   },
   productName: {
-    height: 37,
-    maxWidth: 100,
-    color: "#fff",
-    alignItems: "center",
+    width: 140,
     textAlign: "center",
+    color: "#fff",
   },
   btn: {
+    justifyContent: "center",
     backgroundColor: "#ff3737",
-    padding: 5,
+    height: 26,
+    paddingLeft: 8,
+    paddingRight: 8,
     borderRadius: 50,
   },
 });
