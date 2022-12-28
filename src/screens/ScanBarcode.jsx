@@ -64,7 +64,7 @@ const CameraScan = () => {
         <Pressable onPress={() => {}}>
           <Ionicons
             name="md-add-circle"
-            size={30}
+            size={40}
             style={{ color: "#219653" }}
           />
         </Pressable>
@@ -81,11 +81,15 @@ const styles = StyleSheet.create({
     backgroundColor: "#2B2828",
   },
   camera: { flex: 1 },
-  products: { flex: 1 },
+  products: { flex: 1.7 },
   buttons: {
-    padding: 5,
-    margin: 20,
+    flex: 0.2,
     flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 5,
+    margin: 15,
+    bottom: 5,
     alignItems: "baseline",
   },
   confirmBtn: {
