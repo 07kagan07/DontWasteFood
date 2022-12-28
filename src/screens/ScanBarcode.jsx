@@ -19,13 +19,14 @@ const CameraScan = () => {
 
   const addDate = (date, idx) => {
     console.log("data=>", date, "IDX=>", idx);
+    scannedData && console.log("Data v idx=>", scannedData[idx]);
   };
 
   const handleAddData = () => {
     const newData = { ProductName: "Product Name" };
     setScannedData([...scannedData, newData]);
   };
-
+  console.log("ScannedData=>", scannedData);
   return (
     <View style={styles.container}>
       <View style={styles.camera}>
