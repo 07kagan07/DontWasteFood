@@ -6,17 +6,17 @@ import ProductDetail from "../components/ProductDetail";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const CameraScan = () => {
+const CameraScan = ({ flag, setFlag }) => {
   const [scannedData, setScannedData] = useState([]);
   const [text, onChangeText] = useState("Product Name");
 
   const storeData = async (value) => {
     try {
       const jsonValue = JSON.stringify(value);
-      console.log("json==>", jsonValue);
       await AsyncStorage.setItem("datas", jsonValue);
+      setFlag(!flag);
     } catch (e) {
-      // saving error
+      console.log(e);
     }
   };
 
@@ -92,7 +92,7 @@ const CameraScan = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 3,
-    backgroundColor: "#2B2828",
+    backgroundColor: "#1e2732",
   },
   camera: { flex: 0.8 },
   products: {

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable, TextInput } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import DatePickerr from "./DatePicker";
 
 const ProductDetail = ({ idx, data, deleteItem }) => {
@@ -37,7 +37,7 @@ export default ProductDetail;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#222222",
+    backgroundColor: "#273340",
     height: 45,
     alignItems: "center",
     flexDirection: "row",

@@ -4,23 +4,25 @@ import ScanBarcode from "./src/screens/ScanBarcode";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "./src/screens/Home";
+import { useState } from "react";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  const [flag, setFlag] = useState(false);
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#222222" }}>
-      <View style={{ flex: 1, backgroundColor: "#222222" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#273340" }}>
+      <View style={{ flex: 1, backgroundColor: "#273340" }}>
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
-              tabBarStyle: { backgroundColor: "#222222" },
+              tabBarStyle: { backgroundColor: "#273340" },
               headerStyle: {
-                backgroundColor: "#222222",
+                backgroundColor: "#273340",
               },
               headerTitleStyle: { color: "#fff" },
               headerTitleAlign: "center",
-              tabBarIcon: ({ focused, color, size }) => {
+              tabBarIcon: ({ focused, size }) => {
                 if (route.name === "HOME") {
                   return (
                     <Ionicons
@@ -43,8 +45,10 @@ export default function App() {
               tabBarActiveTintColor: "tomato",
             })}
           >
-            <Tab.Screen name="HOME" component={Home} />
-            <Tab.Screen name="SCAN BARCODE" component={ScanBarcode} />
+            <Tab.Screen name="HOME">{() => <Home flag={flag} />}</Tab.Screen>
+            <Tab.Screen name="SCAN BARCODE">
+              {() => <ScanBarcode flag={flag} setFlag={setFlag} />}
+            </Tab.Screen>
           </Tab.Navigator>
         </NavigationContainer>
       </View>
