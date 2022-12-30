@@ -6,6 +6,12 @@ const ProductDetail = ({ idx, data, deleteItem }) => {
   const [showPlaceholder, setShowPlaceholder] = useState(true);
   const [newData, setNewData] = useState(data?.ProductName);
 
+  useEffect(() => {
+    if (data !== null) {
+      data.ProductName = newData;
+    }
+  }, [newData]);
+
   return (
     <View style={styles.container}>
       <TextInput
