@@ -2,14 +2,9 @@ import { View, Text, StyleSheet, Pressable, TextInput } from "react-native";
 import React, { useEffect, useState } from "react";
 import DatePickerr from "./DatePicker";
 
-const ProductDetail = ({ idx, data, deleteItem, addDate }) => {
-  const [date, setDate] = useState(new Date());
+const ProductDetail = ({ idx, data, deleteItem }) => {
   const [showPlaceholder, setShowPlaceholder] = useState(true);
   const [newData, setNewData] = useState(data?.ProductName);
-
-  useEffect(() => {
-    addDate(date, idx);
-  }, [date]);
 
   return (
     <View style={styles.container}>
@@ -24,7 +19,7 @@ const ProductDetail = ({ idx, data, deleteItem, addDate }) => {
         onBlur={() => setShowPlaceholder(true)}
       />
       <Text style={styles.date}>
-        <DatePickerr date={date} setDate={setDate} />
+        <DatePickerr data={data} />
       </Text>
       <Pressable
         style={styles.btn}

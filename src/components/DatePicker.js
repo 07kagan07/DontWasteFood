@@ -1,9 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 import { Pressable, Text, Platform } from "react-native";
 
-const DatePicker = ({ date, setDate }) => {
+const DatePicker = ({ data }) => {
+  const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(Platform.OS === "android" ? false : true);
+
+  useEffect(() => {
+    data.Date = date;
+  }, [date]);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;

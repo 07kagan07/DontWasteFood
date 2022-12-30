@@ -9,32 +9,32 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#2B2828" }}>
-      <View style={{ flex: 1, backgroundColor: "#2B2828" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#222222" }}>
+      <View style={{ flex: 1, backgroundColor: "#222222" }}>
         <NavigationContainer>
           <Tab.Navigator
             screenOptions={({ route }) => ({
-              tabBarStyle: { backgroundColor: "#2b2828" },
+              tabBarStyle: { backgroundColor: "#222222" },
               headerStyle: {
-                backgroundColor: "#2B2828",
+                backgroundColor: "#222222",
               },
               headerTitleStyle: { color: "#fff" },
               headerTitleAlign: "center",
               tabBarIcon: ({ focused, color, size }) => {
-                if (route.name === "Home") {
+                if (route.name === "HOME") {
                   return (
                     <Ionicons
                       name="md-home-sharp"
                       size={size}
-                      color={focused ? "red" : color}
+                      color={focused ? "red" : "#DFDFDF"}
                     />
                   );
-                } else if (route.name === "Scan Barcode") {
+                } else if (route.name === "SCAN BARCODE") {
                   return (
                     <Ionicons
                       name="camera"
                       size={size}
-                      color={focused ? "red" : color}
+                      color={focused ? "red" : "#DFDFDF"}
                     />
                   );
                 }
@@ -43,8 +43,8 @@ export default function App() {
               tabBarActiveTintColor: "tomato",
             })}
           >
-            <Tab.Screen name="Home" component={Home} />
-            <Tab.Screen name="Scan Barcode" component={ScanBarcode} />
+            <Tab.Screen name="HOME" component={Home} />
+            <Tab.Screen name="SCAN BARCODE" component={ScanBarcode} />
           </Tab.Navigator>
         </NavigationContainer>
       </View>

@@ -1,13 +1,24 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CameraExam from "../components/Camera";
 import { StatusBar } from "expo-status-bar";
 import ProductDetail from "../components/ProductDetail";
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CameraScan = () => {
   const [scannedData, setScannedData] = useState([]);
   const [text, onChangeText] = useState("Product Name");
+
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
+      console.log("json==>", jsonValue);
+      await AsyncStorage.setItem("datas", jsonValue);
+    } catch (e) {
+      // saving error
+    }
+  };
 
   const deleteItem = async (idx) => {
     const temp = [...scannedData];
@@ -17,16 +28,15 @@ const CameraScan = () => {
     setScannedData(temp);
   };
 
-  const addDate = (date, idx) => {
-    console.log("data=>", date, "IDX=>", idx);
-    scannedData && console.log("Data v idx=>", scannedData[idx]);
-  };
+  useEffect(() => {
+    scannedData && console.log("Scanned DATA=>", scannedData);
+  }, [scannedData]);
 
   const handleAddData = () => {
     const newData = { ProductName: "Product Name" };
     setScannedData([...scannedData, newData]);
   };
-  console.log("ScannedData=>", scannedData);
+
   return (
     <View style={styles.container}>
       <View style={styles.camera}>
@@ -43,7 +53,6 @@ const CameraScan = () => {
                 data={data}
                 deleteItem={deleteItem}
                 scannedData={scannedData}
-                addDate={addDate}
                 onChangeText={onChangeText}
               />
             ))}
@@ -51,7 +60,10 @@ const CameraScan = () => {
       </ScrollView>
 
       <View style={styles.buttons}>
-        <Pressable style={styles.confirmBtn}>
+        <Pressable
+          style={styles.confirmBtn}
+          onPress={() => storeData(scannedData)}
+        >
           <Text
             style={{
               color: "white",
