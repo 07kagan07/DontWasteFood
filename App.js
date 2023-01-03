@@ -45,7 +45,9 @@ export default function App() {
               tabBarActiveTintColor: "tomato",
             })}
           >
-            <Tab.Screen name="HOME">{() => <Home flag={flag} />}</Tab.Screen>
+            <Tab.Screen name="HOME">
+              {() => <Home flag={flag} setFlag={setFlag} />}
+            </Tab.Screen>
             <Tab.Screen name="SCAN BARCODE">
               {() => <ScanBarcode flag={flag} setFlag={setFlag} />}
             </Tab.Screen>

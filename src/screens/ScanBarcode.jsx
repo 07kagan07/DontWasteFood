@@ -1,12 +1,13 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import CameraExam from "../components/Camera";
 import { StatusBar } from "expo-status-bar";
 import ProductDetail from "../components/ProductDetail";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Toast from "react-native-toast-message";
 
-const CameraScan = ({ flag, setFlag }) => {
+const ScanBarcode = ({ flag, setFlag }) => {
   const [scannedData, setScannedData] = useState([]);
   const [text, onChangeText] = useState("Product Name");
 
@@ -20,6 +21,15 @@ const CameraScan = ({ flag, setFlag }) => {
     }
   };
 
+  const getData = async () => {
+    try {
+      const jsonValue = await AsyncStorage.getItem("datas");
+      return jsonValue != null ? JSON.parse(jsonValue) : null;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const deleteItem = async (idx) => {
     const temp = [...scannedData];
 
@@ -28,13 +38,18 @@ const CameraScan = ({ flag, setFlag }) => {
     setScannedData(temp);
   };
 
-  useEffect(() => {
-    scannedData && console.log("Scanned DATA=>", scannedData);
-  }, [scannedData]);
-
   const handleAddData = () => {
     const newData = { ProductName: "Product Name" };
     setScannedData([...scannedData, newData]);
+  };
+
+  const showToast = () => {
+    Toast.show({
+      type: "success",
+      text1: "İşlem Başarılı",
+      visibilityTime: 1500,
+      topOffset: 250,
+    });
   };
 
   return (
@@ -61,8 +76,20 @@ const CameraScan = ({ flag, setFlag }) => {
 
       <View style={styles.buttons}>
         <Pressable
+          disabled={scannedData.length === 0 ? true : false}
           style={styles.confirmBtn}
-          onPress={() => storeData(scannedData)}
+          onPress={async () => {
+            const data = await getData();
+            const newArray = data
+              ? [...scannedData, ...data]
+              : [...scannedData];
+            newArray.sort(function (a, b) {
+              return new Date(a.Date) - new Date(b.Date);
+            });
+            await storeData(newArray);
+            showToast();
+            setScannedData([]);
+          }}
         >
           <Text
             style={{
@@ -83,7 +110,7 @@ const CameraScan = ({ flag, setFlag }) => {
           />
         </Pressable>
       </View>
-
+      <Toast />
       <StatusBar style="auto" />
     </View>
   );
@@ -116,4 +143,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CameraScan;
+export default ScanBarcode;
