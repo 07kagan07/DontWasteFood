@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import HomeDetail from "../components/HomeDetail";
 import Toast, { ErrorToast } from "react-native-toast-message";
+import Category from "../components/Category";
 
 const Home = ({ flag, setFlag }) => {
   const [datas, setDatas] = useState([]);
@@ -63,14 +64,16 @@ const Home = ({ flag, setFlag }) => {
         ) : (
           ""
         )}
-        {datas?.map((data, index) => (
-          <HomeDetail
-            key={index}
-            idx={index}
-            data={data}
-            deleteItem={deleteItem}
-          />
-        ))}
+        <Category
+          datas={datas.filter((x) => x.Type === "Medicane")}
+          deleteItem={deleteItem}
+          label="Medicine"
+        />
+        <Category
+          datas={datas.filter((x) => x.Type !== "Medicane")}
+          deleteItem={deleteItem}
+          label="General"
+        />
       </ScrollView>
     </View>
   );
