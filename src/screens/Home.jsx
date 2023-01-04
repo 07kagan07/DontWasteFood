@@ -18,7 +18,6 @@ const Home = ({ flag, setFlag }) => {
   };
 
   useEffect(() => {
-    console.log(datas);
     getData();
   }, [flag]);
 

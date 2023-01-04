@@ -12,10 +12,9 @@ export default function CameraExam({ scannedData, setScannedData }) {
   const Stack = createNativeStackNavigator();
 
   const getData = async (data) => {
-    console.log("data", data);
     try {
       const req = await fetch(
-        `http://192.168.1.103:3000/barcodes/${data}`
+        `https://dont-waste-foo.herokuapp.com/barcodes/${data}`
       ).then((res) => res.json());
       return req;
     } catch (error) {
