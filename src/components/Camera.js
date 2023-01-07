@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import axios from "axios";
 
 export default function CameraExam({ scannedData, setScannedData }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -14,11 +13,12 @@ export default function CameraExam({ scannedData, setScannedData }) {
   const getData = async (data) => {
     try {
       const req = await fetch(
-        `https://dont-waste-foo.herokuapp.com/barcodes/${data}`
+        `https://dont-waste-foo.herokuapp.com/barcodes/${data}` //dont-waste-foo.herokuapp.com
       ).then((res) => res.json());
+      console.log("Data=>", req);
       return req;
     } catch (error) {
-      console.error(error);
+      return null;
     }
   };
 
