@@ -9,18 +9,22 @@ const HomeDetail = ({ idx, data, deleteItem }) => {
 
   if (diffDays < 3) {
     styles.productName = {
+      width: 140,
       color: "#FF6A6A",
     };
   } else if (diffDays < 5) {
     styles.productName = {
+      width: 140,
       color: "#FFB287",
     };
   } else if (diffDays < 10) {
     styles.productName = {
+      width: 140,
       color: "#FCFF7D",
     };
   } else {
     styles.productName = {
+      width: 140,
       color: "#A6FF87",
     };
   }
@@ -28,7 +32,9 @@ const HomeDetail = ({ idx, data, deleteItem }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.productName}>
-        {data?.productName?.substring(0, 15).concat("...")}
+        {data?.productName?.length > 15
+          ? data?.productName?.substring(0, 15).concat("...")
+          : data?.productName}
       </Text>
       <Text style={styles.date}>
         {diffDays} {diffDays === 1 ? "Day" : "Days"} Left
@@ -57,11 +63,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     margin: 5,
   },
-  date: {
-    color: "#d9d9d9",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+
   date: {
     color: "#fff",
     alignItems: "center",

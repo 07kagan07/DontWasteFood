@@ -2,6 +2,7 @@ import { View, Text, Pressable, ScrollView, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import HomeDetail from "./HomeDetail";
 import { Ionicons } from "@expo/vector-icons";
+import Toast, { ErrorToast } from "react-native-toast-message";
 
 const Category = ({ datas, label, deleteItem }) => {
   const [show, setShow] = useState(false);
@@ -20,6 +21,27 @@ const Category = ({ datas, label, deleteItem }) => {
       </Pressable>
       {show && (
         <ScrollView>
+          {datas.length === 0 ? (
+            <View style={{ height: "100%" }}>
+              <ErrorToast
+                style={{
+                  backgroundColor: "#22728c",
+                  justifyContent: "center",
+                  borderLeftColor: "tomato",
+                  width: "100%",
+                  marginTop: 10,
+                }}
+                text1={`Add ${label} Product from Scan Barcode`}
+                text1Style={{
+                  fontSize: 16,
+                  color: "white",
+                  textAlign: "center",
+                }}
+              />
+            </View>
+          ) : (
+            ""
+          )}
           {datas?.map((data, index) => (
             <HomeDetail
               key={index}

@@ -1,8 +1,6 @@
 import { Pressable, View, Text, ScrollView } from "react-native";
 import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import HomeDetail from "../components/HomeDetail";
-import Toast, { ErrorToast } from "react-native-toast-message";
 import Category from "../components/Category";
 
 const Home = ({ flag, setFlag }) => {
@@ -42,27 +40,6 @@ const Home = ({ flag, setFlag }) => {
   return (
     <View style={{ flex: 1, backgroundColor: "#1e2732" }}>
       <ScrollView>
-        {datas.length === 0 ? (
-          <View style={{ height: "100%" }}>
-            <ErrorToast
-              style={{
-                backgroundColor: "#22728c",
-                justifyContent: "center",
-                borderLeftColor: "tomato",
-                width: "100%",
-                marginTop: 10,
-              }}
-              text1="Add Product from Scan Barcode"
-              text1Style={{
-                fontSize: 17,
-                color: "white",
-                textAlign: "center",
-              }}
-            />
-          </View>
-        ) : (
-          ""
-        )}
         <Category
           datas={datas.filter((x) => x.type === "Medicane")}
           deleteItem={deleteItem}
