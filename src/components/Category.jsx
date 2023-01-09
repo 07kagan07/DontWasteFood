@@ -6,6 +6,8 @@ import { Ionicons } from "@expo/vector-icons";
 const Category = ({ datas, label, deleteItem }) => {
   const [show, setShow] = useState(false);
 
+  console.log(datas);
+
   return (
     <View>
       <Pressable onPress={() => setShow(!show)} style={styles.header}>

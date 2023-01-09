@@ -39,7 +39,7 @@ const ScanBarcode = ({ flag, setFlag }) => {
   };
 
   const handleAddData = () => {
-    const newData = { ProductName: "Product Name" };
+    const newData = { productName: "Product Name" };
     setScannedData([...scannedData, newData]);
   };
 

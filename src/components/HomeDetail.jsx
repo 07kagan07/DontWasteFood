@@ -2,7 +2,6 @@ import { View, Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
 
 const HomeDetail = ({ idx, data, deleteItem }) => {
-  //  const [dayLeft, setDayLeft] = useState(second)
   const date1 = new Date();
   const date2 = new Date(data?.Date);
   const diffTime = Math.abs(date2 - date1);
@@ -29,7 +28,7 @@ const HomeDetail = ({ idx, data, deleteItem }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.productName}>
-        {data?.productName.substring(0, 15).concat("...")}
+        {data?.productName?.substring(0, 15).concat("...")}
       </Text>
       <Text style={styles.date}>
         {diffDays} {diffDays === 1 ? "Day" : "Days"} Left
